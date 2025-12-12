@@ -4,12 +4,10 @@ from dotenv import load_dotenv
 load_dotenv()
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
-ADMIN_CHAT_ID = os.getenv("ADMIN_CHAT_ID")
+ADMIN_IDS = [int(x.strip()) for x in os.getenv("ADMIN_IDS", "").split(",") if x.strip()]
 
 if not BOT_TOKEN:
     raise RuntimeError("BOT_TOKEN is not set")
 
-if not ADMIN_CHAT_ID:
-    raise RuntimeError("ADMIN_CHAT_ID is not set")
-
-ADMIN_CHAT_ID = int(ADMIN_CHAT_ID)
+if not ADMIN_IDS:
+    raise RuntimeError("ADMIN_IDS is not set (comma-separated)")
