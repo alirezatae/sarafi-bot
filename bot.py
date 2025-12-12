@@ -2,7 +2,7 @@
 import re
 import telebot
 from telebot import types
-from config import BOT_TOKEN, ADMIN_IDS
+from config import BOT_TOKEN, ADMIN_CHAT_ID
 from db import (
     init_db,
     create_transaction,
