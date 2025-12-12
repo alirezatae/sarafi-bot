@@ -25,7 +25,7 @@ def format_user(username, fullname, user_id):
     return f"ID: {user_id}"
 
 def is_admin(user_id: int) -> bool:
-    return user_id in ADMIN_IDS
+    return user_id in ADMIN_CHAT_ID
 
 bot = telebot.TeleBot(BOT_TOKEN, parse_mode="HTML")
 user_state = {}
@@ -173,7 +173,7 @@ def confirm_or_cancel(call):
 
     display = format_user(call.from_user.username, call.from_user.full_name, chat_id)
 
-    for admin in ADMIN_IDS:
+    for admin in ADMIN_CHAT_ID:
         bot.send_message(
             admin,
             f"🔔 درخواست جدید حواله UK→IR\n"
@@ -398,7 +398,7 @@ def handle_receipt(message):
 
     bot.send_message(user_id, "رسید شما دریافت شد. لطفاً منتظر بررسی صرافی بمانید. ✅")
 
-    for admin in ADMIN_IDS:
+    for admin in ADMIN_CHAT_ID:
         bot.forward_message(admin, user_id, message.message_id)
 
         kb = types.InlineKeyboardMarkup()
@@ -465,7 +465,7 @@ def handle_iran_account(message):
 
     bot.send_message(user_id, "اطلاعات گیرنده ثبت شد ✅\nحواله شما در صف انجام قرار گرفت.")
 
-    for admin in ADMIN_IDS:
+    for admin in ADMIN_CHAT_ID:
         kb = types.InlineKeyboardMarkup()
         kb.add(types.InlineKeyboardButton("✅ حواله انجام شد", callback_data=f"done_tx_{tx_id}"))
 
